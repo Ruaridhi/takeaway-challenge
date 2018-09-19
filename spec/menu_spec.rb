@@ -1,7 +1,5 @@
 require "menu"
 
-
-
 describe Menu do
 
   describe "#list" do
@@ -17,18 +15,22 @@ describe Menu do
     it "responds to select_item" do
       expect(subject).to respond_to(:select_item).with(2).arguments
     end
-  end
+    it "should raise an error if the selected items not on menu" do
+      expect{subject.select_item(:pizza, 10)}.to raise_error("Item not on the menu")
+    end
     it "selects an item from the menu with quantity" do
       subject.select_item("burger", 2)
-      expect(subject.my_order).to eq([{"burger"=>2}])
+      expect(subject.my_order).to eq(:burger=>2)#([{:item => "burger", :quant => 2}])
     end
-  #   it "should raise an error if the selected items not on menu"do
-  #     expect{subject.select_item(:pizza, 10)}.to raise_error("Item not on the menu")
-  #   end
-  # end
-  #
-  # describe "total" do
-  #   it "compairs the total against the sum of the order"
-  # end
+  end
+
+  describe "#total" do
+    it "give you total cost of the order" do
+      subject.select_item("burger", 1)
+      subject.select_item("fries", 1)
+      subject.select_item("soda", 1)
+      expect(subject.total).to eq("Your total bill is £#{total}")
+    end
+  end
 
 end

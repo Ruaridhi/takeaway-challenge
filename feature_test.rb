@@ -15,3 +15,14 @@ menu = Menu.new
 menu.list
 menu.select_item("burger", 2)
 menu.select_item("fries", 2)
+
+# As a customer
+# So that I can verify that my order is correct
+# I would like to check that the total I have been given matches the sum
+# of the various dishes in my order
+
+load './lib/menu.rb'
+menu = Menu.new
+menu.list
+menu.select_item("burger", 2)
+menu.total
